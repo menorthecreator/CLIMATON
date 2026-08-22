@@ -1,0 +1,171 @@
+
+:root {
+  --largura-max: 1120px;
+  --radius: 10px;
+
+  --espaco-sm: 0.75rem;
+  --espaco-md: 1.5rem;
+  --espaco-lg: 3rem;
+  --espaco-xl: 5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.section {
+  padding: var(--espaco-lg) var(--espaco-md);
+  max-width: var(--largura-max);
+  margin: 0 auto;
+}
+
+.section--alt {
+  max-width: none; /* estica full-width, conteúdo interno continua centralizado */
+}
+.section--alt > * {
+  max-width: var(--largura-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* No celular menu vira painel; no pc vira barra horizontal. */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid #ddd;
+}
+
+.header__inner {
+  max-width: var(--largura-max);
+  margin: 0 auto;
+  padding: 0.9rem var(--espaco-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* 3 barras — some no desktop */
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-toggle.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.is-active span:nth-child(2) { opacity: 0; }
+.nav-toggle.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: var(--espaco-sm) var(--espaco-md) var(--espaco-md);
+
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+.nav.is-open {
+  max-height: 320px; /* ajustar se adicionar mais itens */
+}
+.nav a {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eee;
+}
+.nav a:last-child {
+  border-bottom: none;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+.hero {
+  padding: var(--espaco-xl) var(--espaco-md);
+}
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+.footer {
+  padding: var(--espaco-lg) var(--espaco-md);
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+
+
+/* ==========================================================
+   TABLET
+   ========================================================== */
+@media (min-width: 600px) {
+  /* espaço pra grid de 2 colunas quando você adicionar conteúdo aqui */
+}
+
+
+/* ==========================================================
+   DESKTOP — menu vira barra horizontal, hamburguer some
+   ========================================================== */
+@media (min-width: 960px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--espaco-md);
+    border: none;
+    padding: 0;
+    max-height: none;
+    overflow: visible;
+    background: transparent;
+  }
+  .nav a {
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .section {
+    padding: var(--espaco-xl) var(--espaco-md);
+  }
+}
